@@ -12,7 +12,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="1.7"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -21,6 +21,7 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:background="#3434FF">
+
 
             <TextView
                 android:layout_width="match_parent"
@@ -32,7 +33,11 @@
             <ListView
                 android:id="@+id/lvDesordenado"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+
+
 
         </LinearLayout>
 
@@ -53,16 +58,57 @@
             <ListView
                 android:id="@+id/lvOrdenado"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+
+
+
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="3"
         android:orientation="vertical"
         android:background="#4747FF">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Método de ordenação: "
+                android:textSize="12pt"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="HeapSort"
+                android:textSize="10pt"
+                android:textAlignment="center"/>
+
+            <EditText
+                android:id="@+id/etIteracao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="10pt"
+                android:textAlignment="center"
+                android:editable="false"/>
+
+       </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
@@ -83,21 +129,56 @@
             android:layout_height="wrap_content"
             android:hint="Digite o nome do usuário..." />
 
-        <Button
-            android:id="@+id/btCadastrar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Cadastrar"
-            android:textSize="10pt" />
 
-        <Button
-            android:id="@+id/btLimparLista"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Limpar lista"
-            android:textSize="10pt" />
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+            <Space
+                android:layout_width="17dp"
+                android:layout_height="wrap_content">
+
+            </Space>
+
+            <Button
+                android:id="@+id/btOrdenar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Ordenar"
+                android:textSize="7pt" />
+
+            <Space
+                android:layout_width="15dp"
+                android:layout_height="wrap_content">
+
+            </Space>
+            <Button
+                android:id="@+id/btCadastrar"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:text="Cadastrar"
+                android:textSize="7pt" />
+            <Space
+                android:layout_width="15dp"
+                android:layout_height="wrap_content">
+
+            </Space>
+
+            <Button
+                android:id="@+id/btLimparLista"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Limpar"
+                android:textSize="7pt" />
+        </LinearLayout>
 
     </LinearLayout>
 

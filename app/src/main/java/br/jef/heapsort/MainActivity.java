@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import java.lang.reflect.Array;
@@ -18,6 +19,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private Button btCadastrar;
     private Button btLimpar;
+    private Button btOrdenar;
     private EditText etNome;
     private ListView lvDesordenado;
     private ListView lvOrdenado;
@@ -25,19 +27,24 @@ public class MainActivity extends AppCompatActivity {
     private List<Usuario> listaOrdenado;
     private ArrayAdapter adapter1;
     private ArrayAdapter adapter2;
+    private RadioButton rbHeap;
+    private RadioButton rbBubble;
+    private EditText etIteracao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        etIteracao = findViewById(R.id.etIteracao);
         btCadastrar = findViewById(R.id.btCadastrar);
         btLimpar = findViewById(R.id.btLimparLista);
+        btOrdenar = findViewById(R.id.btOrdenar);
         etNome = findViewById(R.id.etNome);
         lvDesordenado = findViewById(R.id.lvDesordenado);
         lvOrdenado = findViewById(R.id.lvOrdenado);
         carregarListaDesordenada();
-        buubleSort();
+        //bubbleSort();
 
         //carregarListaOrdenada();
         btCadastrar.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 cadastrar();
                 carregarListaDesordenada();
-                buubleSort();
               //  carregarListaOrdenada();
             }
         });
@@ -55,9 +61,19 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 limpar();
                 carregarListaDesordenada();
-                carregarListaOrdenada();
+               // bubbleSort();
+                heapSort();
             }
         });
+
+        btOrdenar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                heapSort();
+                }
+        });
+
+
     }
 
     private void cadastrar() {
@@ -82,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     private void carregarListaDesordenada() {
         listaUsuarios = UsuarioDAO.getUsuarios(this);
 
@@ -98,8 +113,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     //Lista Ordenada
-    private void carregarListaOrdenada() {
+    private void heapSort() {
         listaOrdenado = UsuarioDAO.getUsuarios(this);
+        int iteracoes = 0;
 
         if (listaOrdenado.size() == 0) {
 
@@ -158,36 +174,46 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 j = index;
+                iteracoes++;
 
             }while(index < i);
         }
-
+        etIteracao.setText("Total de iterações: " + iteracoes);
         adapter2 = new ArrayAdapter(this, android.R.layout.simple_list_item_1, lista);
         lvOrdenado.setAdapter(adapter2);
     }
 
-    private void buubleSort(){
+    private void bubbleSort(){
         listaOrdenado = UsuarioDAO.getUsuarios(this);
         int aux = listaOrdenado.size();
         String [] lista = new String [aux];
         String aux2;
+        int iteracoes = 0;
+        boolean ordenado;
 
         for (int i = 0; i < aux; i++){
             lista [i] = listaOrdenado.get(i).getNome();
         }
 
         for(int i = 0;i < aux; i++) {
+            ordenado = true;
+
             for (int j = 0; j < aux-1; j++) {
+                iteracoes++;
                 if (lista[j].compareTo(lista[j + 1]) > 0) {
                     aux2 = lista[j];
                     lista[j] = lista[j + 1];
                     lista[j + 1] = aux2;
+                    ordenado = false;
                 }
             }
+            if(ordenado){
+                break;
+            }
         }
-
+        etIteracao.setText("" + iteracoes);
         adapter1 = new ArrayAdapter(this, android.R.layout.simple_list_item_1, lista);
-        lvDesordenado.setAdapter(adapter1);
+        lvOrdenado.setAdapter(adapter1);
     }
 
 }
